@@ -1,0 +1,516 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OneBlood</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #000000, #050505);
+        }
+
+        /* NAVBAR */
+    .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;   
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 30px;   /* reduced padding */
+
+    background: rgba(255, 255, 255, 0.071);
+    backdrop-filter: blur(10px);
+
+    z-index: 1000;
+}
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: rgb(255, 0, 0);
+        }
+
+    .nav-links a {
+    margin: 0 10px;
+    padding: 8px 18px;
+    text-decoration: none;
+    color: rgb(255, 0, 0);
+    border: 2px solid rgb(255, 0, 0);
+    border-radius: 25px;
+
+    transition: all 0.3s ease;
+}
+
+    .nav-links a:hover {
+    background: red;
+    color: white;
+}
+        
+
+        .nav-buttons a {
+            margin-left: 10px;
+            padding: 8px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+    .login-btn {
+    padding: 8px 18px;
+    border: 2px solid red;
+    color: red;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: red;
+    color: white;
+}
+
+    .logo {
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+        /* HERO SECTION */
+    .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 60px;
+
+   background: linear-gradient(to right, #000000, #050505);
+    overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+}
+
+.hero::before {
+    background: red;
+    top: 50px;
+    left: 100px;
+}
+
+
+        .hero-text,
+.hero img {
+    position: relative;
+    z-index: 1;
+}
+
+        .hero-text h1 {
+    color: white;
+}
+
+.hero-text p {
+    color: #ccc;
+}
+
+    .hero-text button {
+    margin-top: 20px;
+    padding: 14px 30px;
+    background: linear-gradient(45deg, red, darkred);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.hero-text button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.hero img {
+    width: 500px;
+    max-width: 100%;
+
+    filter: drop-shadow(0 0 20px rgba(255,0,0,0.3));
+}
+
+.hero {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+        /* PARALLAX */
+    .parallax {
+    position: relative;
+    height: 400px;
+
+    background-image: url("https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1920&q=80");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parallax-2 {
+    background-image: url("https://images.unsplash.com/photo-1615461066841-6116e61058f4");
+}
+
+.parallax-content {
+    position: relative;
+    z-index: 2;
+}
+
+.parallax::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.1);  /* 🔥 lighter */
+}
+
+    .parallax-content {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    max-width: 650px;
+
+    /* Glow border */
+    border: 3px solid rgb(255, 255, 255);
+
+    /* Depth */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.parallax-content h2 {
+    font-size: 32px;
+    color: red;
+    margin-bottom: 15px;
+}
+
+.parallax-content p {
+    color: #ddd;
+    line-height: 1.6;
+}
+
+        /* INFO SECTION */
+    .info {
+    padding: 60px;
+    text-align: center;
+    background: linear-gradient(to right, #000000, #050505);
+    color: white;
+}
+
+.info p {
+    color: #ddd;   
+    line-height: 1.6;
+}
+
+        .info h2 {
+            color: red;
+            margin-bottom: 15px;
+        }
+
+ .features {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(to right, #000000, #050505);
+}
+
+.features-container-wrapper {
+    position: relative;
+    margin-top: 40px;
+}
+
+/* 🔥 BLOB ONLY HERE */
+.features-container-wrapper::before {
+    content: "";
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    background: rgb(255, 0, 0);
+    border-radius: 50%;
+    filter: blur(120px);
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 0;
+}
+
+.features-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+
+    position: relative;
+    z-index: 1;
+}
+
+   .card {
+    background: rgba(255, 255, 255, 0.05);  
+    backdrop-filter: blur(15px);           
+    -webkit-backdrop-filter: blur(15px);
+
+    border-radius: 15px;
+
+    border: 1px solid rgb(255, 252, 252); 
+
+    color: white;
+    padding: 25px;
+
+    width: 280px;
+    text-align: center;
+
+    position: relative;
+    overflow: hidden;
+
+    transition: 0.3s;
+}
+
+.card p {
+    color: #ccc;
+}
+
+.card h3 {
+    color: white;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgb(255, 255, 255);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    padding: 2px;
+
+    background: linear-gradient(45deg, rgb(255, 255, 255), rgb(255, 255, 255));
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+}
+
+.logo {
+    text-decoration: none;
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.contact {
+    background: linear-gradient(to right, #000000, #050505);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.contact h2 {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.contact p {
+    color: #ccc;
+}
+
+.contact-info {
+    margin-top: 20px;
+}
+
+.contact-info p {
+    margin: 5px 0;
+}
+
+.footer {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    padding-top: 80px;   /* prevents overlap */
+}
+
+section {
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/" class="logo">🩸 OneBlood</a>
+
+    <div class="nav-links">
+        <a href="/search/">Check Availability</a>
+        <a href="/request/">Request Blood</a>
+        <a href="/donate/">Donate Blood</a>
+        <a href="#contact">Contact Us</a>
+    </div>
+
+    <div class="nav-buttons">
+        {% if user.is_authenticated %}
+            <a href="/logout/" class="login-btn">Logout</a>
+        {% else %}
+            <a href="/login/" class="login-btn">Admin Login</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+
+    <div class="hero-text">
+        <h1>OneBlood Platform</h1>
+
+        <p>
+            OneBlood is a smart blood bank management system that connects
+            donors, hospitals, and patients. It ensures quick access to blood
+            during emergencies and helps save lives efficiently.
+        </p>
+
+        <button onclick="location.href='/search/'">
+            Find Blood Now
+        </button>
+    </div>
+
+    <img src="{% static 'images/blood.png' %}" class="hero-img">
+</div>
+
+<!-- PARALLAX SECTION -->
+<div class="parallax parallax-2">
+    <div class="parallax-content">
+        <h2>Why Donate Blood?</h2>
+        <p>
+            A single blood donation can save multiple lives. Blood is essential
+            for surgeries, accident victims, and patients with serious illnesses.
+            Your contribution can make a life-saving difference.
+        </p>
+    </div>
+</div>
+
+<!-- INFO SECTION -->
+<div class="info">
+    <h2>Save Lives with OneBlood</h2>
+    <p>
+        Our platform connects donors, hospitals, and recipients through a
+        centralized system, ensuring fast and reliable access to blood
+        whenever it is needed.
+    </p>
+</div>
+
+<div class="features">
+
+    <!-- heading part stays here -->
+
+    <div class="features-container-wrapper">
+
+        <div class="features-container">
+            <div class="card">
+        <h3>Search Blood</h3>
+        <p>Find blood availability instantly.</p>
+    </div>
+
+    <div class="card">
+        <h3>Request Blood</h3>
+        <p>Request blood in emergencies quickly.</p>
+    </div>
+
+    <div class="card">
+        <h3>Donate Blood</h3>
+        <p>Register and help save lives.</p>
+    </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="parallax">
+    <div class="parallax-content">
+        <h2>Your Blood Can Save Lives</h2>
+        <p>
+            Every drop counts. Join OneBlood and become a life saver today.
+        </p>
+    </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<div class="contact" id="contact">
+
+    <h2>Contact Us</h2>
+
+    <p class="subtitle">
+        We are here to help you. Reach out to us anytime.
+    </p>
+
+    <div class="contact-info">
+        <div class="contact-item">
+            <h4>Email</h4>
+            <p>support@oneblood.com</p>
+        </div>
+
+        <div class="contact-item">
+            <h4>Phone</h4>
+            <p>+91 98765 43210</p>
+        </div>
+
+        <div class="contact-item">
+            <h4>Location</h4>
+            <p>New Delhi, India</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>© 2026 OneBlood | Save Lives Together</p>
+</div>
+
+</body>
+</html>

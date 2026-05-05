@@ -1,0 +1,323 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check Availability - OneBlood</title>
+
+    <style>
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 40px;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+
+    z-index: 1000;
+}
+
+.logo {
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links a {
+    padding: 8px 18px;
+    border: 2px solid red;
+    color: red;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    background: red;
+    color: white;
+}
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #000000, #050505);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===== BLOBS (3 BALANCED BLOBS) ===== */
+.bg-blobs::before,
+.bg-blobs::after,
+.bg-blobs div {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+}
+
+/* LEFT RED */
+.bg-blobs::before {
+    background: rgba(255, 0, 0, 0.7);
+    top: 80px;
+    left: 80px;
+}
+
+/* RIGHT GREEN */
+.bg-blobs::after {
+    background: rgba(0, 255, 120, 0.6);
+    bottom: 80px;
+    right: 80px;
+}
+
+/* CENTER SOFT GLOW */
+.bg-blobs div {
+    background: rgba(255, 100, 0, 0.4);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ===== FLOAT ===== */
+@keyframes floatBox {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+/* ===== HOW IT WORKS ===== */
+.instructions {
+    width: 320px;
+    padding: 18px;
+
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+
+    border-radius: 12px;
+    color: white;
+
+    animation: floatBox 6s ease-in-out infinite;
+}
+
+.instructions h3 {
+    color: red;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.instructions ul {
+    color: #ccc;
+    padding-left: 18px;
+    font-size: 13px;
+}
+
+/* ===== FORM ===== */
+.form-box {
+    width: 320px;
+    padding: 30px;
+
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(15px);
+
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+
+    text-align: center;
+
+    animation: floatBox 5s ease-in-out infinite;
+}
+
+.form-box h2 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* INPUTS */
+.form-box select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+
+    border-radius: 6px;
+    border: none;
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+.form-box select option {
+    color: black;
+    background: white;
+}
+
+/* BUTTON */
+.form-box button {
+    width: 100%;
+    padding: 12px;
+
+    background: linear-gradient(45deg, red, darkred);
+    border: none;
+    color: white;
+
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    box-sizing: border-box;
+}
+
+.form-box button:hover {
+    transform: scale(1.05);
+}
+
+/* ===== RESULTS ===== */
+.results {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.result-box {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+
+    padding: 15px;
+    margin: 10px auto;
+    width: 300px;
+
+    border-radius: 12px;
+    color: white;
+}
+
+.result-box p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+/* NO RESULT */
+.no-result {
+    color: red;
+}
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/" class="logo">🩸 OneBlood</a>
+    <div class="nav-links">
+        <a href="/">Home</a>
+    </div>
+</div>
+
+<!-- BLOBS -->
+<div class="bg-blobs">
+    <div></div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+    <!-- HOW IT WORKS -->
+    <div class="instructions">
+        <h3>How it Works</h3>
+        <ul>
+            <li>Select blood group and city</li>
+            <li>Check availability instantly</li>
+            <li>If not available, create a request</li>
+        </ul>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-box">
+        <h2>Check Blood Availability</h2>
+
+        <form method="GET">
+            <select name="blood_group" required>
+                <option value="">Select Blood Group</option>
+                <option>A+</option>
+                <option>B+</option>
+                <option>O+</option>
+                <option>AB+</option>
+                <option>A-</option>
+                <option>B-</option>
+                <option>O-</option>
+                <option>AB-</option>
+            </select>
+
+            <select name="city" required>
+                <option value="">Select City</option>
+                <option>Delhi</option>
+                <option>Mumbai</option>
+                <option>Bangalore</option>
+                <option>Hyderabad</option>
+                <option>Chennai</option>
+                <option>Kolkata</option>
+                <option>Pune</option>
+                <option>Jaipur</option>
+                <option>Ahmedabad</option>
+                <option>Lucknow</option>
+            </select>
+
+            <button type="submit">Check Availability</button>
+        </form>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results" id="results">
+
+        {% if results %}
+            <h3>Available Blood</h3>
+
+            {% for item in results %}
+                <div class="result-box">
+                    <p><strong>{{ item.hospital_name }}</strong></p>
+                    <p>{{ item.blood_group }} | {{ item.units }} Units</p>
+                    <p>City: {{ item.city }}</p>
+                    <p>Contact: {{ item.contact }}</p>
+                </div>
+            {% endfor %}
+
+        {% elif searched %}
+            <p class="no-result">No blood available in your area.</p>
+            <a href="/request/">Create Request</a>
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('blood_group')) {
+        document.getElementById("results").scrollIntoView({ behavior: "smooth" });
+    }
+</script>
+
+</body>
+</html>

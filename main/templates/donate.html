@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donate - OneBlood</title>
+
+    <style>
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 40px;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+
+    z-index: 1000;
+}
+
+.logo {
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo .drop {
+    color: #ff0000;
+}
+
+.nav-links a {
+    padding: 8px 18px;
+    border: 2px solid red;
+    color: red;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    background: red;
+    color: white;
+}
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #000000, #050505);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===== BLOBS ===== */
+.bg-blobs::before,
+.bg-blobs::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+}
+
+.bg-blobs::before {
+    background: #ffffff;
+    top: 50px;
+    left: 100px;
+}
+
+.bg-blobs::after {
+    background: rgb(254, 0, 0);
+    bottom: 50px;
+    right: 100px;
+}
+
+/* ===== FLOAT ANIMATION (ADDED) ===== */
+@keyframes floatBox {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ===== MAIN WRAPPER ===== */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 100px;
+    gap: 20px;
+}
+
+/* ===== HOW IT WORKS ===== */
+.how-it-works {
+    width: 300px;
+    padding: 12px;
+
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+
+    border-radius: 10px;
+    color: white;
+    font-size: 13px;
+
+    animation: floatBox 6s ease-in-out infinite; /* ✅ ADDED */
+}
+
+.how-it-works h3 {
+    text-align: center;
+    color: red;
+    margin-bottom: 8px;
+}
+
+.how-it-works ul {
+    padding-left: 18px;
+    margin: 0;
+    color: #ccc;
+}
+
+/* ===== FORM ===== */
+.form-container {
+    width: 320px;
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+
+    text-align: center;
+
+    animation: floatBox 5s ease-in-out infinite; /* ✅ ADDED */
+}
+
+.form-container h2 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+/* INPUTS */
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+
+    border: none;
+    border-radius: 6px;
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+
+    box-sizing: border-box;
+}
+
+.form-container select option {
+    color: black;
+    background: white;
+}
+
+/* BUTTON */
+.form-container button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+
+    background: linear-gradient(45deg, red, darkred);
+    border: none;
+    color: white;
+
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-container button:hover {
+    transform: scale(1.05);
+}
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/" class="logo">
+        <span class="drop">🩸</span> OneBlood
+    </a>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+    </div>
+</div>
+
+<!-- BLOBS -->
+<div class="bg-blobs"></div>
+
+<div class="main-container">
+
+    <!-- HOW IT WORKS -->
+    <div class="how-it-works">
+        <h3>How It Works</h3>
+        <ul>
+            <li>Enter your personal details</li>
+            <li>Select your blood group</li>
+            <li>Submit your donor registration</li>
+            <li>Admin will contact you when needed</li>
+        </ul>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-container">
+        <h2>Become a Donor</h2>
+
+        {% if error %}
+            <p style="color:red; text-align:center;">{{ error }}</p>
+        {% endif %}
+
+        {% if success %}
+            <p style="color:lightgreen; text-align:center;">Donor registered successfully!</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="name" placeholder="Full Name" required>
+
+            <select name="blood_group" required>
+                <option value="">Blood Group</option>
+                <option>A+</option>
+                <option>B+</option>
+                <option>O+</option>
+                <option>AB+</option>
+                <option>A-</option>
+                <option>B-</option>
+                <option>O-</option>
+                <option>AB-</option>
+            </select>
+
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <input type="number" name="age" placeholder="Age" required>
+
+            <button type="submit">Become Donor</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
